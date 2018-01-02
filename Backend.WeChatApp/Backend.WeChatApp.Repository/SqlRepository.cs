@@ -1,49 +1,45 @@
 ﻿using Backend.WeChatApp.Domain.Entities.Core;
+using Backend.WeChatApp.Repository.Core;
 using DapperExtensions;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
+using System.Web;
 
 namespace Backend.WeChatApp.Repository
 {
 	public class SqlRepository<TEntity> : IRepository<TEntity> where TEntity : EntityBase, new()
 	{
-		private readonly IDbConnection _connection;
-		private readonly IDbTransaction _transaction;
+		protected IDbSession _dbsession;
 
-		public SqlRepository(IDbConnection connection, IDbTransaction transaction = null)
+		public SqlRepository(IDbSession dbsession)
 		{
-			_connection = connection;
-			_transaction = transaction;
+			_dbsession = dbsession;
 		}
 
-		public IEnumerable<TEntity> GetList()
+		public IEnumerable<TEntity> GetList(object predicate = null, IList<ISort> sort = null)
 		{
-			throw new NotImplementedException();
+			return _dbsession.Connection.GetList<TEntity>(predicate, sort, _dbsession.Transaction);
 		}
 
 		public TEntity Get(Guid id)
 		{
-			using (_connection)
-			{
-				return _connection.Get<TEntity>(id);
-			}
+			return _dbsession.Connection.Get<TEntity>(id, _dbsession.Transaction);
 		}
 
-		public bool Update(TEntity t)
+		public bool Update(TEntity entity)
 		{
-			throw new NotImplementedException();
+			return _dbsession.Connection.Update(entity, _dbsession.Transaction);
 		}
 
 		public TEntity Insert(TEntity apply)
 		{
-			throw new NotImplementedException();
+			return _dbsession.Connection.Insert(apply, _dbsession.Transaction);
 		}
 
 		public bool Delete(TEntity t)
 		{
-			throw new NotImplementedException();
+			return _dbsession.Connection.Delete(t, _dbsession.Transaction);
 		}
 	}
 }

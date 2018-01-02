@@ -8,8 +8,6 @@ namespace Backend.WeChatApp.Repository
 {
 	public interface IRepository<T>
 	{
-		IEnumerable<T> GetList();
-
 		T Get(Guid id);
 
 		bool Update(T t);
