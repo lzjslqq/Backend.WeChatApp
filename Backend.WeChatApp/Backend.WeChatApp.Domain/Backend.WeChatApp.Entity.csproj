@@ -7,8 +7,8 @@
     <ProjectGuid>{FA39D40A-F0A8-44E7-99BC-E1456892E051}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Backend.WeChatApp.Domain</RootNamespace>
-    <AssemblyName>Backend.WeChatApp.Domain</AssemblyName>
+    <RootNamespace>Backend.WeChatApp.Entity</RootNamespace>
+    <AssemblyName>Backend.WeChatApp.Entity</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -48,10 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Core\EntityBase.cs" />
-    <Compile Include="Entities\Role.cs" />
-    <Compile Include="Entities\User.cs" />
-    <Compile Include="Entities\UserRole.cs" />
+    <Compile Include="Core\EntityBase.cs" />
+    <Compile Include="Role.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

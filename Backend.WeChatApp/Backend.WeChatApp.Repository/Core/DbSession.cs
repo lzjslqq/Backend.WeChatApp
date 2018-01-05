@@ -12,6 +12,7 @@ namespace Backend.WeChatApp.Repository.Core
 	{
 		private IDbConnection _dbconnection;
 		private IDbTransaction _transaction;
+
 		public IDbConnection Connection
 		{
 			get { return _dbconnection ?? ConnectionFactory.CreateSqlConnection(); }
@@ -25,7 +26,8 @@ namespace Backend.WeChatApp.Repository.Core
 
 		public IDbTransaction Begin(IsolationLevel isolation = IsolationLevel.ReadCommitted)
 		{
-			return _dbconnection.BeginTransaction(isolation);
+			_transaction = _dbconnection.BeginTransaction(isolation);
+			return _transaction;
 		}
 
 		public void Commit()
@@ -40,10 +42,12 @@ namespace Backend.WeChatApp.Repository.Core
 
 		public void Dispose()
 		{
-			if (_dbconnection.State != ConnectionState.Closed)
+			if (_dbconnection.State == ConnectionState.Open)
 			{
 				_dbconnection.Close();
 			}
+
+			_dbconnection.Dispose();
 		}
 	}
 }

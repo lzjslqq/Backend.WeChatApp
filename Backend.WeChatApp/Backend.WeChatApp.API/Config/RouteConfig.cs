@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using Backend.WeChatApp.API.Routing;
+using System.Web.Http;
 
 namespace Backend.WeChatApp.API.Config
 {
@@ -11,8 +12,8 @@ namespace Backend.WeChatApp.API.Config
 			routes.MapHttpRoute(
 				"DefaultHttpRoute",
 				"api/{controller}/{key}",
-				defaults: new { key = RouteParameter.Optional }
-				//constraints: new { key = new GuidRouteConstraint()}
+				defaults: new { id = RouteParameter.Optional },
+				constraints: new { id = new GuidRouteConstraint() }
 				);
 		}
 	}

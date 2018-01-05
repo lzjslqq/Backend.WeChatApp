@@ -1,6 +1,6 @@
-﻿using Backend.WeChatApp.Domain.Entities.Core;
+﻿using Backend.WeChatApp.Entity;
 
-namespace Backend.WeChatApp.Domain.Entities
+namespace Backend.WeChatApp.Entity
 {
 	public class User : EntityBase
 	{

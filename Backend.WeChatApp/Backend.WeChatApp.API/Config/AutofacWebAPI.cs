@@ -1,5 +1,7 @@
 ﻿using Autofac;
 using Autofac.Integration.WebApi;
+using Backend.WeChatApp.Repository.Core;
+using Backend.WeChatApp.Repository.Sql;
 using System.Reflection;
 using System.Web.Http;
 
@@ -20,7 +22,16 @@ namespace Backend.WeChatApp.API.Config
 		private static IContainer RegisterServices(ContainerBuilder builder)
 		{
 			builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
-			// registration goes here
+
+			builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).PropertiesAutowired();
+
+			// dbsession
+			builder.RegisterType<DbSession>().As<IDbSession>().InstancePerRequest();
+
+			// repository
+			builder.RegisterGeneric(typeof(SqlRepositoryBase<>)).As(typeof(ISqlRepository<>)).InstancePerRequest();
+
+			// service
 			return builder.Build();
 		}
 	}

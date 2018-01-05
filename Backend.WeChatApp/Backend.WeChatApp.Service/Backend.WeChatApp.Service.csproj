@@ -39,7 +39,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\OperationResult.cs" />
+    <Compile Include="IMembershipService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Backend.WeChatApp.Domain\Backend.WeChatApp.Entity.csproj">
+      <Project>{fa39d40a-f0a8-44e7-99bc-e1456892e051}</Project>
+      <Name>Backend.WeChatApp.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Backend.WeChatApp.Repository\Backend.WeChatApp.Repository.csproj">
+      <Project>{75c1ea23-d043-4a69-b102-556b8d2c1bce}</Project>
+      <Name>Backend.WeChatApp.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Backend.WeChatApp.Domain.Entities.Core
+namespace Backend.WeChatApp.Entity
 {
 	public class EntityBase
 	{

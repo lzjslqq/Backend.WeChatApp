@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend.WeChatApp.Domain", "Backend.WeChatApp.Domain\Backend.WeChatApp.Domain.csproj", "{FA39D40A-F0A8-44E7-99BC-E1456892E051}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend.WeChatApp.Entity", "Backend.WeChatApp.Domain\Backend.WeChatApp.Entity.csproj", "{FA39D40A-F0A8-44E7-99BC-E1456892E051}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend.WeChatApp.API", "Backend.WeChatApp.API\Backend.WeChatApp.API.csproj", "{55C646DD-42F2-4780-870C-8AFF0CB09B80}"
 EndProject
