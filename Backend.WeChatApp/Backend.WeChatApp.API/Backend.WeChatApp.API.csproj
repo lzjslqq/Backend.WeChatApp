@@ -51,6 +51,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -62,6 +63,22 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WebApiDoodle.Net.Http, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebApiDoodle.Net.Http.2.0.1\lib\net40\WebApiDoodle.Net.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebApiDoodle.Net.Http.Formatting, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebApiDoodle.Net.Http.Formatting.2.0.1\lib\net40\WebApiDoodle.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebApiDoodle.Web, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebApiDoodle.Web.2.0.1\lib\net40\WebApiDoodle.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebApiDoodle.Web.Meta, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebApiDoodle.Web.Meta.2.0.1\lib\net40\WebApiDoodle.Web.Meta.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\AutofacWebAPI.cs" />
@@ -69,6 +86,7 @@
     <Compile Include="Config\WebAPIConfig.cs" />
     <Compile Include="Filters\InvalidModelStateFilterAttribute.cs" />
     <Compile Include="Formatting\SuppressedRequiredMemberSelector.cs" />
+    <Compile Include="MessageHandlers\AuthHandler.cs" />
     <Compile Include="MessageHandlers\RequireHttpsMessageHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routing\GuidRouteConstraint.cs" />
@@ -85,6 +103,10 @@
     <ProjectReference Include="..\Backend.WeChatApp.Repository\Backend.WeChatApp.Repository.csproj">
       <Project>{75c1ea23-d043-4a69-b102-556b8d2c1bce}</Project>
       <Name>Backend.WeChatApp.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Backend.WeChatApp.Service\Backend.WeChatApp.Service.csproj">
+      <Project>{83f38780-7caa-41f6-93b6-88e189a42cab}</Project>
+      <Name>Backend.WeChatApp.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -12,7 +12,7 @@ namespace Backend.WeChatApp.Repository
 
 		bool Update(T t);
 
-		T Insert(T apply);
+		dynamic Insert(T apply);
 
 		bool Delete(T t);
 	}

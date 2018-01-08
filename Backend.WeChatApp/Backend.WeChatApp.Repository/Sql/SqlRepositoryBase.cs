@@ -1,10 +1,12 @@
 ﻿using Backend.WeChatApp.Entity;
 using Backend.WeChatApp.Repository.Core;
+using Backend.WeChatApp.Repository;
 using Dapper;
 using DapperExtensions;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using DapperExtensions.Mapper;
 
 namespace Backend.WeChatApp.Repository.Sql
 {
@@ -32,7 +34,7 @@ namespace Backend.WeChatApp.Repository.Sql
 			return Dbsession.Connection.Update(entity, Dbsession.Transaction);
 		}
 
-		public virtual TEntity Insert(TEntity apply)
+		public virtual dynamic Insert(TEntity apply)
 		{
 			return Dbsession.Connection.Insert(apply, Dbsession.Transaction);
 		}

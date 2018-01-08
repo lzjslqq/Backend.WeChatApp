@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend.WeChatApp.Repositor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend.WeChatApp.Service", "Backend.WeChatApp.Service\Backend.WeChatApp.Service.csproj", "{83F38780-7CAA-41F6-93B6-88E189A42CAB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend.WeChatApp.Utility", "Backend.WeChatApp.Utility\Backend.WeChatApp.Utility.csproj", "{C7677393-8C4D-481D-84C1-B98D338501FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{83F38780-7CAA-41F6-93B6-88E189A42CAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83F38780-7CAA-41F6-93B6-88E189A42CAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83F38780-7CAA-41F6-93B6-88E189A42CAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7677393-8C4D-481D-84C1-B98D338501FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7677393-8C4D-481D-84C1-B98D338501FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7677393-8C4D-481D-84C1-B98D338501FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7677393-8C4D-481D-84C1-B98D338501FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -42,12 +42,12 @@ namespace Backend.WeChatApp.Repository.Core
 
 		public void Dispose()
 		{
-			if (_dbconnection.State == ConnectionState.Open)
+			if (_dbconnection != null)
 			{
 				_dbconnection.Close();
+				_transaction.Dispose();
+				_dbconnection.Dispose();
 			}
-
-			_dbconnection.Dispose();
 		}
 	}
 }

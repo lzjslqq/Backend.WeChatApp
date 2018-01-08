@@ -1,7 +1,9 @@
 ﻿using Backend.WeChatApp.Entity;
 using Backend.WeChatApp.Repository.Core;
+using Backend.WeChatApp.Utility.EnumTypes;
 using DapperExtensions;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Backend.WeChatApp.Repository.Sql
 {
@@ -13,17 +15,15 @@ namespace Backend.WeChatApp.Repository.Sql
 		}
 
 		/// <summary>
-		/// To create a simple predicate, just create a FieldPredicate and pass it to the query operation. FieldPredicate expects a generic type which allows for strong typing.
-		/// In the example below, we are returning all User where the IsLocked value is equal to true.
+		///    To create a simple predicate, just create a FieldPredicate and pass it to the query operation. FieldPredicate expects a generic   type which allows for strong typing.
 		/// </summary>
 		/// <returns></returns>
-		public IEnumerable<User> GetUsers1()
+		public User GetUser(string username)
 		{
 			// select * from user where name = true;
-
 			// Demonstrate that you can pass an IEnumerable as the value to acheive WHERE x IN ('a','b') functionality
-			var predicate = Predicates.Field<User>(u => u.IsLocked, Operator.Eq, true);
-			return GetList(predicate);
+			var predicate = Predicates.Field<User>(u => u.Name, Operator.Eq, username);
+			return GetList(predicate).FirstOrDefault();
 		}
 
 		/// <summary>
@@ -32,15 +32,15 @@ namespace Backend.WeChatApp.Repository.Sql
 		///  In the example below, we create a predicate group with an AND operator:
 		/// </summary>
 		/// <returns></returns>
-		public IEnumerable<User> GetUsers2()
+		public User GetSingleByUsername(string username)
 		{
-			// select * from user where name like 'li%' and islocked = true;
-
+			// select * from user where name = @username and Status = 1;
+			// 传入一个 IEnumerable 类型作为 value的值可以实现 WHERE x IN ('a','b') 功能。
 			var pg = new PredicateGroup { Operator = GroupOperator.And, Predicates = new List<IPredicate>() };
-			pg.Predicates.Add(Predicates.Field<User>(u => u.Name, Operator.Like, "li%"));
-			pg.Predicates.Add(Predicates.Field<User>(u => u.IsLocked, Operator.Eq, true));
-			var predicate = Predicates.Field<User>(u => u.Name, Operator.Eq, true);
-			return GetList(pg);
+			pg.Predicates.Add(Predicates.Field<User>(u => u.Name, Operator.Eq, username));
+			pg.Predicates.Add(Predicates.Field<User>(u => u.Status, Operator.Eq, (int)Status.Yes));
+
+			return GetList(pg).FirstOrDefault();
 		}
 
 		/// <summary>

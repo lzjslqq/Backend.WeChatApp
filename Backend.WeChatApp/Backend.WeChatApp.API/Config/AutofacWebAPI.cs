@@ -2,6 +2,8 @@
 using Autofac.Integration.WebApi;
 using Backend.WeChatApp.Repository.Core;
 using Backend.WeChatApp.Repository.Sql;
+using Backend.WeChatApp.Service;
+using Backend.WeChatApp.Service.Interfaces;
 using System.Reflection;
 using System.Web.Http;
 
@@ -32,6 +34,8 @@ namespace Backend.WeChatApp.API.Config
 			builder.RegisterGeneric(typeof(SqlRepositoryBase<>)).As(typeof(ISqlRepository<>)).InstancePerRequest();
 
 			// service
+			builder.RegisterType<CryptoService>().As<ICryptoService>().InstancePerRequest();
+
 			return builder.Build();
 		}
 	}

@@ -53,6 +53,10 @@
     <Compile Include="Core\DbSession.cs" />
     <Compile Include="Core\IDbSession.cs" />
     <Compile Include="Core\IRepository.cs" />
+    <Compile Include="DapperExtension\CustomPluralizedMapper.cs" />
+    <Compile Include="DapperExtension\Mappings.cs" />
+    <Compile Include="Extensions\UserRepositoryExtensions.cs" />
+    <Compile Include="Extensions\UserRoleRepositoryExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sql\ISqlRepository.cs" />
     <Compile Include="Sql\SqlRepositoryBase.cs" />
@@ -63,10 +67,15 @@
       <Project>{fa39d40a-f0a8-44e7-99bc-e1456892e051}</Project>
       <Name>Backend.WeChatApp.Entity</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Backend.WeChatApp.Utility\Backend.WeChatApp.Utility.csproj">
+      <Project>{c7677393-8c4d-481d-84c1-b98d338501fe}</Project>
+      <Name>Backend.WeChatApp.Utility</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
