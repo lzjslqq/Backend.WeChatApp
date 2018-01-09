@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using Autofac.Integration.WebApi;
 using Backend.WeChatApp.Repository.Core;
-using Backend.WeChatApp.Repository.Sql;
+using Backend.WeChatApp.Repository.SqlServer;
 using Backend.WeChatApp.Service;
 using Backend.WeChatApp.Service.Interfaces;
 using System.Reflection;

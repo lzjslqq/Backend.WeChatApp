@@ -11,7 +11,7 @@ namespace Backend.WeChatApp.Service.Common
 		public bool IsSuccess { get; private set; }
 		public string Message { get; private set; }
 
-		public OperationResult(bool isSuccess, string message)
+		public OperationResult(bool isSuccess, string message = null)
 		{
 			IsSuccess = isSuccess;
 			Message = message;
@@ -20,7 +20,7 @@ namespace Backend.WeChatApp.Service.Common
 
 	public class OperationResult<TEntity> : OperationResult
 	{
-		public OperationResult(bool isSuccess, string message)
+		public OperationResult(bool isSuccess, string message = null)
 			: base(isSuccess, message)
 		{
 		}

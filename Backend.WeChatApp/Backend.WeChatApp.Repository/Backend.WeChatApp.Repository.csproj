@@ -53,14 +53,15 @@
     <Compile Include="Core\DbSession.cs" />
     <Compile Include="Core\IDbSession.cs" />
     <Compile Include="Core\IRepository.cs" />
-    <Compile Include="DapperExtension\CustomPluralizedMapper.cs" />
-    <Compile Include="DapperExtension\Mappings.cs" />
+    <Compile Include="DapperExtensionCore\CustomPluralizedMapper.cs" />
+    <Compile Include="DapperExtensionCore\Mappings.cs" />
     <Compile Include="Extensions\UserRepositoryExtensions.cs" />
-    <Compile Include="Extensions\UserRoleRepositoryExtensions.cs" />
+    <Compile Include="Extensions\UserInRoleRepositoryExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sql\ISqlRepository.cs" />
-    <Compile Include="Sql\SqlRepositoryBase.cs" />
-    <Compile Include="Sql\UserRepository.cs" />
+    <Compile Include="SqlServer\ISqlRepository.cs" />
+    <Compile Include="SqlServer\SqlRepositoryBase.cs" />
+    <Compile Include="SqlServer\SqlRepositoryExtensions.cs" />
+    <Compile Include="SqlServer\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Backend.WeChatApp.Domain\Backend.WeChatApp.Entity.csproj">

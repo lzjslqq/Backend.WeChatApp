@@ -57,6 +57,10 @@
       <Project>{75c1ea23-d043-4a69-b102-556b8d2c1bce}</Project>
       <Name>Backend.WeChatApp.Repository</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Backend.WeChatApp.Utility\Backend.WeChatApp.Utility.csproj">
+      <Project>{c7677393-8c4d-481d-84c1-b98d338501fe}</Project>
+      <Name>Backend.WeChatApp.Utility</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

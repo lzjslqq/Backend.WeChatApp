@@ -12,8 +12,15 @@ namespace Backend.WeChatApp.Repository.Core
 	{
 		private IDbConnection _dbconnection;
 		private IDbTransaction _transaction;
+		private int? commandTimeout;
 
-		public IDbConnection Connection
+		public virtual int? CommandTimeout
+		{
+			get { return commandTimeout; }
+			set { commandTimeout = value; }
+		}
+
+		public virtual IDbConnection Connection
 		{
 			get { return _dbconnection ?? ConnectionFactory.CreateSqlConnection(); }
 			set { _dbconnection = value; }
@@ -24,7 +31,7 @@ namespace Backend.WeChatApp.Repository.Core
 			get { return _transaction; }
 		}
 
-		public IDbTransaction Begin(IsolationLevel isolation = IsolationLevel.ReadCommitted)
+		public IDbTransaction BeginTran(IsolationLevel isolation = IsolationLevel.ReadCommitted)
 		{
 			_transaction = _dbconnection.BeginTransaction(isolation);
 			return _transaction;

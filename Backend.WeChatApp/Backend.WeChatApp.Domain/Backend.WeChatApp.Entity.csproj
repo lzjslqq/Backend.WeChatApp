@@ -51,7 +51,7 @@
     <Compile Include="Core\EntityBase.cs" />
     <Compile Include="Role.cs" />
     <Compile Include="User.cs" />
-    <Compile Include="UserRole.cs" />
+    <Compile Include="UserInRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

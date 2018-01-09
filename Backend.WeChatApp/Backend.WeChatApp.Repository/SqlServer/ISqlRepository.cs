@@ -3,14 +3,17 @@ using System;
 using System.Collections.Generic;
 using DapperExtensions;
 using System.Data;
+using Backend.WeChatApp.Repository.Core;
 
-namespace Backend.WeChatApp.Repository.Sql
+namespace Backend.WeChatApp.Repository.SqlServer
 {
 	public interface ISqlRepository<TEntity> : IRepository<TEntity> where TEntity : EntityBase, new()
 	{
-		int Execute(string sql, object param = null, int? commandTimeout = null, CommandType? commandType = null);
+		IDbSession Dbsession { get; }
 
-		IEnumerable<TEntity> GetList(object predicate = null, IList<ISort> sort = null);
+		int Execute(string sql, object param = null, CommandType? commandType = null);
+
+		IEnumerable<TEntity> GetList(object predicate = null, IList<ISort> sort = null, bool buffered = false);
 
 		IEnumerable<TEntity> GetPageList(object predicate, IList<ISort> sort, int page, int pageSize);
 	}

@@ -11,8 +11,9 @@ namespace Backend.WeChatApp.Repository.Core
 	{
 		IDbConnection Connection { get; set; }
 		IDbTransaction Transaction { get; }
+		int? CommandTimeout { get; set; }
 
-		IDbTransaction Begin(IsolationLevel isolation = IsolationLevel.ReadCommitted);
+		IDbTransaction BeginTran(IsolationLevel isolation = IsolationLevel.ReadCommitted);
 
 		void Commit();
 

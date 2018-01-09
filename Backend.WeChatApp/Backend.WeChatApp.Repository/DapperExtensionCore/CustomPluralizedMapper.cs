@@ -1,7 +1,7 @@
 ﻿using DapperExtensions.Mapper;
 using System;
 
-namespace Backend.WeChatApp.Repository
+namespace Backend.WeChatApp.Repository.DapperExtensionCore
 {
 	public class CustomPluralizedMapper<T> : PluralizedAutoClassMapper<T> where T : class
 	{

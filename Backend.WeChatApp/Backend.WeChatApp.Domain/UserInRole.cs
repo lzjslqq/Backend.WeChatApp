@@ -3,7 +3,7 @@ using System;
 
 namespace Backend.WeChatApp.Entity
 {
-	public class UserRole : EntityBase
+	public class UserInRole : EntityBase
 	{
 		public Guid UserId { get; set; }
 		public Guid RoleId { get; set; }

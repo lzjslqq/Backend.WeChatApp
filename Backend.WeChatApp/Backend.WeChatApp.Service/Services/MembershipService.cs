@@ -1,10 +1,13 @@
 ﻿using Backend.WeChatApp.Entity;
 using Backend.WeChatApp.Repository.Extensions;
-using Backend.WeChatApp.Repository.Sql;
+using Backend.WeChatApp.Repository.SqlServer;
 using Backend.WeChatApp.Service.Common;
 using Backend.WeChatApp.Service.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Security.Principal;
+using System.Linq;
+using Backend.WeChatApp.Utility.Extensions;
 
 namespace Backend.WeChatApp.Service
 {
@@ -15,14 +18,14 @@ namespace Backend.WeChatApp.Service
 		private readonly ICryptoService _cryptoService;
 		private readonly ISqlRepository<User> _userRepository;
 		private readonly ISqlRepository<Role> _roleRepository;
-		private readonly ISqlRepository<UserRole> _userRoleRepository;
+		private readonly ISqlRepository<UserInRole> _userInRoleRepository;
 
-		public MembershipService(ICryptoService cryptoService, ISqlRepository<User> userRepository, ISqlRepository<Role> roleRepository, ISqlRepository<UserRole> userRoleRepository)
+		public MembershipService(ICryptoService cryptoService, ISqlRepository<User> userRepository, ISqlRepository<Role> roleRepository, ISqlRepository<UserInRole> userRoleRepository)
 		{
 			_cryptoService = cryptoService;
 			_userRepository = userRepository;
 			_roleRepository = roleRepository;
-			_userRoleRepository = userRoleRepository;
+			_userInRoleRepository = userRoleRepository;
 		}
 
 		#endregion 字段及构造函数
@@ -35,6 +38,11 @@ namespace Backend.WeChatApp.Service
 			var user = _userRepository.GetSingleByUsername(username);
 			if (user != null && isUserValid(user, password))
 			{
+				var userRoles = _userInRoleRepository.GetUserRoles(_roleRepository, user.Id);
+				userContext.User = new UserWithRoles { User = user, Roles = userRoles };
+
+				var identity = new GenericIdentity(user.Name);
+				userContext.Principal = new GenericPrincipal(identity, userRoles.Select(x => x.Name).ToArray());
 			}
 
 			return userContext;
@@ -52,10 +60,40 @@ namespace Backend.WeChatApp.Service
 
 		public OperationResult<UserWithRoles> CreateUser(string username, string email, string password, string[] roles)
 		{
-			throw new NotImplementedException();
+			var existingUser = _userRepository.GetSingleByUsername(username);
+
+			if (existingUser != null)
+			{
+				return new OperationResult<UserWithRoles>(false, "该用户已存在");
+			}
+
+			var passwordSalt = _cryptoService.GenerateSalt();
+
+			var user = new User()
+			{
+				Name = username,
+				Salt = passwordSalt,
+				Email = email,
+				IsLocked = false,
+				HashedPassword = _cryptoService.EncryptPassword(password, passwordSalt),
+				CreateTime = DateTime.Now
+			};
+
+			Guid userId = _userRepository.Insert(user);
+
+			if (roles.IsNotEmpty())
+			{
+				foreach (var roleName in roles)
+				{
+					// Todo 添加到角色表
+					//addUserToRole(user, roleName);
+				}
+			}
+
+			return new OperationResult<UserWithRoles>(true) { Entity = GetUserWithRoles(user) };
 		}
 
-		public UserWithRoles UpdateUser(Entity.User user, string username, string email)
+		public UserWithRoles UpdateUser(User user, string username, string email)
 		{
 			throw new NotImplementedException();
 		}
@@ -80,17 +118,17 @@ namespace Backend.WeChatApp.Service
 			throw new NotImplementedException();
 		}
 
-		public IEnumerable<Entity.Role> GetRoles()
+		public IEnumerable<Role> GetRoles()
 		{
 			throw new NotImplementedException();
 		}
 
-		public Entity.Role GetRole(Guid key)
+		public Role GetRole(Guid key)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Entity.Role GetRole(string name)
+		public Role GetRole(string name)
 		{
 			throw new NotImplementedException();
 		}
@@ -122,6 +160,21 @@ namespace Backend.WeChatApp.Service
 		private bool isPasswordValid(User user, string password)
 		{
 			return string.Equals(_cryptoService.EncryptPassword(password, user.Salt), user.HashedPassword);
+		}
+
+		private UserWithRoles GetUserWithRoles(User user)
+		{
+			if (user != null)
+			{
+				var userRoles = _userInRoleRepository.GetUserRoles(_roleRepository, user.Id);
+				return new UserWithRoles()
+				{
+					User = user,
+					Roles = userRoles
+				};
+			}
+
+			return null;
 		}
 
 		#endregion 辅助方法

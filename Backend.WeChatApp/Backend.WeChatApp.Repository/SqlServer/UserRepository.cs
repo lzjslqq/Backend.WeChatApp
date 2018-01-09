@@ -5,7 +5,7 @@ using DapperExtensions;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Backend.WeChatApp.Repository.Sql
+namespace Backend.WeChatApp.Repository.SqlServer
 {
 	public class UserRepository : SqlRepositoryBase<User>
 	{
