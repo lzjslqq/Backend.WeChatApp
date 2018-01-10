@@ -16,9 +16,9 @@ namespace Backend.WeChatApp.Service.Interfaces
 
 		OperationResult<UserWithRoles> CreateUser(string username, string email, string password, string role);
 
-		OperationResult<UserWithRoles> CreateUser(string username, string email, string password, string[] roles);
+		OperationResult<UserWithRoles> CreateUser(string username, string email, string password, IEnumerable<string> roles);
 
-		UserWithRoles UpdateUser(User user, string username, string email);
+		UserWithRoles UpdateUser(User user);
 
 		bool ChangePassword(string username, string oldPassword, string newPassword);
 

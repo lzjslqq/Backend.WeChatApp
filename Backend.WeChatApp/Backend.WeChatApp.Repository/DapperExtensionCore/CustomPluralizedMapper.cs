@@ -10,6 +10,7 @@ namespace Backend.WeChatApp.Repository.DapperExtensionCore
 			if (tableName.Equals("UserInRole", StringComparison.CurrentCultureIgnoreCase))
 			{
 				TableName = "UserRole";
+				Schema("dbo");
 			}
 
 			base.Table(tableName);

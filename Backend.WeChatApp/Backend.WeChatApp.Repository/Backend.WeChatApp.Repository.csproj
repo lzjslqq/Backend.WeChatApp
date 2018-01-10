@@ -55,6 +55,7 @@
     <Compile Include="Core\IRepository.cs" />
     <Compile Include="DapperExtensionCore\CustomPluralizedMapper.cs" />
     <Compile Include="DapperExtensionCore\Mappings.cs" />
+    <Compile Include="Extensions\RoleRepositoryExtensions.cs" />
     <Compile Include="Extensions\UserRepositoryExtensions.cs" />
     <Compile Include="Extensions\UserInRoleRepositoryExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

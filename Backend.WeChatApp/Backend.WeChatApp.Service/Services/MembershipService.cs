@@ -50,15 +50,15 @@ namespace Backend.WeChatApp.Service
 
 		public OperationResult<UserWithRoles> CreateUser(string username, string email, string password)
 		{
-			throw new NotImplementedException();
+			return CreateUser(username, password, email, roles: null);
 		}
 
 		public OperationResult<UserWithRoles> CreateUser(string username, string email, string password, string role)
 		{
-			throw new NotImplementedException();
+			return CreateUser(username, password, email, roles: new[] { role });
 		}
 
-		public OperationResult<UserWithRoles> CreateUser(string username, string email, string password, string[] roles)
+		public OperationResult<UserWithRoles> CreateUser(string username, string email, string password, IEnumerable<string> roles)
 		{
 			var existingUser = _userRepository.GetSingleByUsername(username);
 
@@ -76,7 +76,8 @@ namespace Backend.WeChatApp.Service
 				Email = email,
 				IsLocked = false,
 				HashedPassword = _cryptoService.EncryptPassword(password, passwordSalt),
-				CreateTime = DateTime.Now
+				CreateTime = DateTime.Now,
+				Status = 1
 			};
 
 			Guid userId = _userRepository.Insert(user);
@@ -85,17 +86,23 @@ namespace Backend.WeChatApp.Service
 			{
 				foreach (var roleName in roles)
 				{
-					// Todo 添加到角色表
-					//addUserToRole(user, roleName);
+					// 添加到用户角色表
+					addUserToRole(user, roleName);
 				}
 			}
 
-			return new OperationResult<UserWithRoles>(true) { Entity = GetUserWithRoles(user) };
+			return new OperationResult<UserWithRoles>(true)
+			{
+				Entity = GetUserWithRoles(user)
+			};
 		}
 
-		public UserWithRoles UpdateUser(User user, string username, string email)
+		public UserWithRoles UpdateUser(User user)
 		{
-			throw new NotImplementedException();
+			user.UpdateTime = DateTime.Now;
+			_userRepository.Update(user);
+
+			return GetUserWithRoles(user);
 		}
 
 		public bool ChangePassword(string username, string oldPassword, string newPassword)
@@ -175,6 +182,34 @@ namespace Backend.WeChatApp.Service
 			}
 
 			return null;
+		}
+
+		private void addUserToRole(User user, string roleName)
+		{
+			var role = _roleRepository.GetSingleByRoleName(roleName);
+			Guid roleId = role == null ? Guid.Empty : role.Id;
+
+			if (role == null)
+			{
+				var newRole = new Role
+				{
+					Name = roleName,
+					CreateTime = DateTime.Now,
+					Status = 1
+				};
+
+				roleId = _roleRepository.Insert(newRole);
+			}
+
+			var userInRole = new UserInRole()
+			{
+				RoleId = roleId,
+				UserId = user.Id,
+				CreateTime = DateTime.Now,
+				Status = 1
+			};
+
+			_userInRoleRepository.Insert(userInRole);
 		}
 
 		#endregion 辅助方法
